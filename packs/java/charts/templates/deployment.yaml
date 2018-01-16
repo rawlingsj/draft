@@ -19,5 +19,13 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.service.internalPort }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.service.probePath }}
+            port: {{ .Values.service.internalPort }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.service.probePath }}
+            port: {{ .Values.service.internalPort }}
         resources:
 {{ toYaml .Values.resources | indent 12 }}

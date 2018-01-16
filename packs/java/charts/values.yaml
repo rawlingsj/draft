@@ -9,6 +9,9 @@ service:
   type: ClusterIP
   externalPort: 80
   internalPort: 8080
+  annotations:
+    fabric8.io/expose: "true"
+  probePath: /
 resources:
   limits:
     cpu: 1000m
