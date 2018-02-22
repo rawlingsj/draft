@@ -22,12 +22,12 @@ func TestFromDir(t *testing.T) {
 	if err != nil {
 		t.Fatalf("could not load python pack: %v", err)
 	}
-	if pack.Chart == nil {
+	if pack.Charts == nil {
 		t.Errorf("expected chart to be non-nil")
 	}
 
-	if string(pack.Dockerfile) != expectedDockerfile {
-		t.Errorf("expected dockerfile == expected, got '%v'", pack.Dockerfile)
+	if string(pack.Files[0].Filename) != expectedDockerfile {
+		t.Errorf("expected dockerfile == expected, got '%v'", pack.Files[0].Filename)
 	}
 
 	if _, err := FromDir("dir-does-not-exist"); err == nil {

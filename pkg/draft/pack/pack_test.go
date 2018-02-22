@@ -14,13 +14,25 @@ const testDockerfile = `FROM nginx:latest
 `
 
 func TestSaveDir(t *testing.T) {
-	p := &Pack{
-		Chart: &chart.Chart{
-			Metadata: &chart.Metadata{
-				Name: "chart-for-nigel-thornberry",
-			},
+
+	chart := chart.Chart{
+		Metadata: &chart.Metadata{
+			Name: "chart-for-nigel-thornberry",
 		},
-		Dockerfile: []byte(testDockerfile),
+	}
+
+	charts := []chart.Chart{chart}
+
+	file := RootChartFiles{
+		Filename: "Dockerfile",
+		File:     []byte(testDockerfile),
+	}
+
+	files := []RootChartFiles{file}
+
+	p := &Pack{
+		Charts: charts,
+		Files:  files,
 	}
 	dir, err := ioutil.TempDir("", "draft-pack-test")
 	if err != nil {
@@ -34,13 +46,24 @@ func TestSaveDir(t *testing.T) {
 }
 
 func TestSaveDirDockerfileExistsInAppDir(t *testing.T) {
-	p := &Pack{
-		Chart: &chart.Chart{
-			Metadata: &chart.Metadata{
-				Name: "chart-for-nigel-thornberry",
-			},
+	chart := &chart.Chart{
+		Metadata: &chart.Metadata{
+			Name: "chart-for-nigel-thornberry",
 		},
-		Dockerfile: []byte(testDockerfile),
+	}
+
+	charts := []*chart.Chart{chart}
+
+	file := &RootChartFiles{
+		Filename: "Dockerfile",
+		File:     []byte(testDockerfile),
+	}
+
+	files := []*RootChartFiles{file}
+
+	p := &Pack{
+		Charts: charts,
+		Files:  files,
 	}
 	dir, err := ioutil.TempDir("", "draft-pack-test")
 	if err != nil {
