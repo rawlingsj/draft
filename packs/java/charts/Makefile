@@ -23,7 +23,6 @@ clean:
 	rm -rf ${NAME}*.tgz
 
 release: clean
-	jx step changelog
 	helm dependency build
 	helm lint
 	helm init --client-only
