@@ -41,7 +41,7 @@ func TestFromDir(t *testing.T) {
 
 	dockerfileContents, err := ioutil.ReadAll(dockerfile)
 	if err != nil {
-		t.Error("expected Dockerfile to be readable, got %v", err)
+		t.Errorf("expected Dockerfile to be readable, got %v", err)
 	}
 
 	if string(dockerfileContents) != expectedDockerfile {
