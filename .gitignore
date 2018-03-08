@@ -12,4 +12,3 @@ examples/**/.draftignore
 pkg/linguist/data/classifier
 pkg/linguist/data/linguist
 pkg/linguist/data/*.yml
-.idea/
